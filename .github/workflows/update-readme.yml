@@ -1,0 +1,62 @@
+name: Update README
+
+# Keeps README.md current automatically:
+#  - the section between OVERVIEW markers is rewritten to match the current code
+#  - a new entry is added under the CHANGELOG markers summarizing each push
+#
+# Setup (see SETUP.md):
+#  1. Add a repo (or org) secret named ANTHROPIC_API_KEY.
+#  2. That's it — this runs on every push to main/master.
+
+on:
+  push:
+    branches: [main, master]
+    paths-ignore:
+      - "README.md"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-readme-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  update-readme:
+    if: "!contains(github.event.head_commit.message, '[skip readme]')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet anthropic
+
+      - name: Update README
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Override in repo/org "Actions variables" if you want a different model.
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-4-5-20250929' }}
+          COMMIT_SHA: ${{ github.sha }}
+          REPO_NAME: ${{ github.repository }}
+        run: python .github/scripts/update_readme.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "readme-bot"
+          git config user.email "readme-bot@users.noreply.github.com"
+          git add README.md
+          if git diff --cached --quiet; then
+            echo "No README changes."
+            exit 0
+          fi
+          git commit -m "docs: update README [skip readme]"
+          git push
