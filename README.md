@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @Icoolhed
-- 👀 I’m interested in coding and playing games
+- 👀 I’m interested in coding, games and music
 - 🌱 I’m currently learning linux and bash
 
 <!---
