@@ -42,7 +42,7 @@ storage with failover, Traefik + cert-manager handle ingress and TLS.
 </td>
 <td width="50%" valign="top">
 
-### 🧩 &nbsp;Formcraft
+### 🧩 &nbsp;[Formcraft](https://github.com/icoolhed-hq/formcraft)
 A low-code visual form builder living in **one React file**. Drag elements
 onto a canvas, shape them in the inspector, then export schema JSON or a
 production-ready React + Tailwind component.
