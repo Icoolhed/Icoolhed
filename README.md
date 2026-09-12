@@ -79,8 +79,7 @@ overview regenerated, changelog appended. Every new repo ships with it.
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Icoolhed&show_icons=true&hide_border=true&bg_color=05020A&title_color=00F6FF&icon_color=FF00E6&text_color=CFE9FF&ring_color=8B2FFF&rank_icon=github" width="49%" alt="GitHub stats" />
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=Icoolhed&hide_border=true&background=05020A&stroke=8B2FFF&ring=00F6FF&fire=FF00E6&currStreakLabel=00F6FF&sideLabels=CFE9FF&currStreakNum=CFE9FF&sideNums=CFE9FF&dates=8b2fffb0" width="49%" alt="GitHub streak" />
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=Icoolhed&hide_border=true&background=05020A&stroke=8B2FFF&ring=00F6FF&fire=FF00E6&currStreakLabel=00F6FF&sideLabels=CFE9FF&currStreakNum=CFE9FF&sideNums=CFE9FF&dates=8b2fffb0" alt="GitHub streak" />
 
 </div>
 
