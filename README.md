@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:05020A,45:8B2FFF,100:00F6FF&text=Icoolhed&fontColor=FFFFFF&fontSize=72&fontAlignY=32&desc=code%20//%20games%20//%20music&descAlignY=52&descSize=18&animation=fadeIn" width="100%" alt="Icoolhed" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:05020A,45:8B2FFF,100:00F6FF&text=Icoolhed&fontColor=FFFFFF&fontSize=72&fontAlignY=32&desc=code%20//%20self-hosted%20//%20audio&descAlignY=52&descSize=18&animation=fadeIn" width="100%" alt="Icoolhed" />
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=21&pause=900&color=00F6FF&center=true&vCenter=true&width=720&height=45&lines=A+K3s+cluster+humming+away+in+my+home+lab;Single-file+React+tools+that+punch+above+their+weight;Neon+synths+drawn+with+Three.js+and+Web+Audio;Teaching+robots+to+write+my+READMEs" alt="what I do" />
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=21&pause=900&color=00F6FF&center=true&vCenter=true&width=760&height=45&lines=Loopline%3A+a+self-hosted+file+server+for+producers;A+K3s+sandbox+for+breaking+things+safely;Neon+synths+drawn+with+Three.js+and+Web+Audio;A+field+guide+to+animals%2C+laid+out+like+spec+sheets" alt="what I do" />
 
 <br />
 
@@ -16,12 +16,16 @@
 ---
 
 ```console
-isak@coolhed:~$ whoami
+isak@coolhed:~$ kubectl get deployments -n icoolhed --watch
 
-  > builds    home-lab infrastructure, web tools, games, synths
-  > runs      K3s on bare metal — because the cloud is someone else's computer
-  > learning  linux internals, bash, and how far one file can really go
-  > listens   to whatever the synth is doing at 2am
+NAME                 READY   STATUS    AGE
+loopline             1/1     Running   new
+artspecifikationer   1/1     Running   new
+isak-sandbox         1/1     Running   new
+formcraft            1/1     Running   public
+neonwave             1/1     Running   stable
+dopamine-scroll      1/1     Running   stable
+readme-bot           N/N     Running   automated
 ```
 
 ---
@@ -32,12 +36,33 @@ isak@coolhed:~$ whoami
 <tr>
 <td width="50%" valign="top">
 
-### 🖥️ &nbsp;Home Lab
-Infrastructure-as-code for a **K3s** cluster spanning ESXi and Unraid.
-ArgoCD keeps the repo as the single source of truth, Longhorn replicates
-storage with failover, Traefik + cert-manager handle ingress and TLS.
+### 🎚️ &nbsp;Loopline
+A self-hosted file server built around a **producer's workflow**, not generic
+cloud storage: tagged folders, BPM/key detection from filenames, in-browser
+waveform previews, a real playback queue, and password-protected share links.
 
-`k3s` `argocd` `longhorn` `ansible` `traefik`
+`fastapi` `python` `docker` `sqlite`
+
+</td>
+<td width="50%" valign="top">
+
+### 🦉 &nbsp;Artspecifikationer
+A field guide to animals laid out like technical data sheets instead of the
+usual encyclopedia format. Built in Swedish, one component per species card.
+
+`react` `vite` `react-router`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### ☸️ &nbsp;isak-sandbox
+A single-node K3s box for breaking things safely — Ansible-provisioned,
+ArgoCD-managed, the place new home-lab ideas get tried before they touch
+the real cluster.
+
+`k3s` `ansible` `argocd`
 
 </td>
 <td width="50%" valign="top">
@@ -63,11 +88,11 @@ geometry, wrapped in a glass-and-neon HUD. Loud, purple, unnecessary.
 </td>
 <td width="50%" valign="top">
 
-### 🤖 &nbsp;README Bot
-A GitHub Action that reads each push and rewrites the README to match —
-overview regenerated, changelog appended. Every new repo ships with it.
+### 📜 &nbsp;dopamine-scroll
+A scroll-driven landing page that doesn't hold back — heavy animation and a
+reflex minigame hidden in the scroll, built to see how far vanilla JS goes.
 
-`github-actions` `python` `claude-api`
+`javascript` `css-animation` `scroll-driven`
 
 </td>
 </tr>
@@ -89,9 +114,9 @@ overview regenerated, changelog appended. Every new repo ships with it.
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=cs,unity,js,react,tailwind,threejs,python,bash,linux&theme=dark" alt="languages and frameworks" />
+<img src="https://skillicons.dev/icons?i=cs,unity,js,react,vite,tailwind,threejs,python,fastapi&theme=dark" alt="languages and frameworks" />
 <br />
-<img src="https://skillicons.dev/icons?i=kubernetes,docker,ansible,nginx,githubactions,git,vscode,raspberrypi&theme=dark" alt="infrastructure and tooling" />
+<img src="https://skillicons.dev/icons?i=kubernetes,docker,ansible,nginx,githubactions,git,bash,linux,vscode,raspberrypi&theme=dark" alt="infrastructure and tooling" />
 
 </div>
 
