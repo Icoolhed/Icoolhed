@@ -1,0 +1,59 @@
+name: Render profile
+
+# Renders the animated profile panels (.github/profile/render.py, content from
+# profile.json, numbers from the GitHub API) and the contribution snake, then
+# publishes them together to the `output` branch that README.md points at.
+# One job and one publish, so the two can't wipe each other's files there.
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "profile.json"
+      - ".github/profile/**"
+      - ".github/workflows/profile.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-profile
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Render panels
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/profile/render.py --out dist --require-data
+
+      - name: Generate contribution snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          # color_dots: empty day, then four activity levels
+          outputs: |
+            dist/snake.svg?color_snake=#8B2FFF&color_dots=#EFE9FB,#D2B8FF,#A974FF,#8B2FFF,#5B12C9
+            dist/snake-dark.svg?color_snake=#00F6FF&color_dots=#1A1030,#3B1A6B,#6320C9,#A45CFF,#FF00E6
+
+      - name: Publish to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: "Render profile panels"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

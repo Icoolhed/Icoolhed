@@ -1,0 +1,121 @@
+{
+  "login": "Icoolhed",
+  "hero": {
+    "handle": "ICOOLHED",
+    "subtitle": "devops student  //  self-hosted  //  audio tools",
+    "leds": [
+      {
+        "label": "PWR",
+        "color": "green"
+      },
+      {
+        "label": "K3S",
+        "color": "cyan",
+        "blink": true
+      },
+      {
+        "label": "CI",
+        "color": "magenta"
+      },
+      {
+        "label": "REC",
+        "color": "red",
+        "blink": true
+      }
+    ]
+  },
+  "terminal": {
+    "user": "isak",
+    "host": "coolhed",
+    "session": [
+      {
+        "cmd": "whoami",
+        "out": [
+          "isak  //  devops student  //  sweden"
+        ]
+      },
+      {
+        "cmd": "kubectl get projects -n icoolhed",
+        "out": "@board"
+      },
+      {
+        "cmd": "cat ~/now.txt",
+        "out": [
+          "building   loopline, a file server for producers",
+          "learning   linux, bash, k3s, ci/cd pipelines"
+        ]
+      }
+    ]
+  },
+  "projects": [
+    {
+      "slug": "loopline",
+      "name": "Loopline",
+      "kind": "file server",
+      "status": "running",
+      "tagline": "A self-hosted file server built around a producer's workflow.",
+      "description": "Tagged folders, BPM and key detection from filenames, in-browser waveform previews, a real playback queue and password-protected share links.",
+      "tags": [
+        "fastapi",
+        "python",
+        "docker",
+        "sqlite"
+      ],
+      "url": null,
+      "since": "2026-09-02"
+    },
+    {
+      "slug": "artspecifikationer",
+      "name": "Artspecifikationer",
+      "kind": "field guide",
+      "status": "running",
+      "tagline": "Animals documented like hardware spec sheets.",
+      "description": "A field guide in Swedish where every species gets a technical data sheet instead of an encyclopedia entry. One component per species card.",
+      "tags": [
+        "react",
+        "vite",
+        "react-router"
+      ],
+      "url": null,
+      "since": "2026-09-13"
+    },
+    {
+      "slug": "isak-sandbox",
+      "name": "isak-sandbox",
+      "kind": "k3s lab",
+      "status": "running",
+      "tagline": "A single-node K3s box for breaking things safely.",
+      "description": "Ansible-provisioned and ArgoCD-managed. New home-lab ideas get tried here before they touch the real cluster.",
+      "tags": [
+        "k3s",
+        "ansible",
+        "argocd"
+      ],
+      "url": null,
+      "since": "2026-09-13"
+    },
+    {
+      "slug": "formcraft",
+      "name": "Formcraft",
+      "kind": "form builder",
+      "status": "public",
+      "tagline": "A low-code visual form builder living in one React file.",
+      "description": "Drag elements onto a canvas, shape them in the inspector, then export schema JSON or a production-ready React + Tailwind component.",
+      "tags": [
+        "react",
+        "tailwind",
+        "vite",
+        "lucide"
+      ],
+      "url": "https://github.com/icoolhed-hq/formcraft",
+      "since": "2026-09-11"
+    }
+  ],
+  "board_extra": [
+    {
+      "name": "readme-bot",
+      "status": "running",
+      "since": "2026-09-09"
+    }
+  ]
+}
