@@ -1,141 +1,58 @@
+<!--
+  The panels below are rendered by .github/profile/render.py from profile.json
+  (numbers come from the GitHub API) and published to the `output` branch by
+  .github/workflows/profile.yml, daily and on every change to either.
+-->
+
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:05020A,45:8B2FFF,100:00F6FF&text=Icoolhed&fontColor=FFFFFF&fontSize=72&fontAlignY=32&desc=code%20//%20self-hosted%20//%20audio&descAlignY=52&descSize=18&animation=fadeIn" width="100%" alt="Icoolhed" />
+<img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/hero.svg" width="100%" alt="ICOOLHED on a dot-matrix display. DevOps student, self-hosted, audio tools." />
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=21&pause=900&color=00F6FF&center=true&vCenter=true&width=760&height=45&lines=Loopline%3A+a+self-hosted+file+server+for+producers;A+K3s+sandbox+for+breaking+things+safely;Neon+synths+drawn+with+Three.js+and+Web+Audio;A+field+guide+to+animals%2C+laid+out+like+spec+sheets" alt="what I do" />
+<a href="https://github.com/Icoolhed?tab=repositories"><img src="https://img.shields.io/badge/STATUS-BUILDING-00F6FF?style=for-the-badge&labelColor=05020A" alt="Status: building" /></a>
+<img src="https://img.shields.io/badge/LEARNING-LINUX%20%2B%20BASH-FF00E6?style=for-the-badge&labelColor=05020A" alt="Learning: Linux and Bash" />
+<img src="https://img.shields.io/badge/BASED%20IN-SWEDEN-8B2FFF?style=for-the-badge&labelColor=05020A" alt="Based in Sweden" />
+<img src="https://komarev.com/ghpvc/?username=Icoolhed&style=for-the-badge&color=8B2FFF&labelColor=05020A&label=PROFILE+VIEWS" alt="Profile views" />
+
+</div>
 
 <br />
 
-<a href="https://github.com/Icoolhed?tab=repositories"><img src="https://img.shields.io/badge/STATUS-BUILDING-00F6FF?style=for-the-badge&labelColor=05020A" alt="status" /></a>
-<img src="https://img.shields.io/badge/LEARNING-LINUX%20%2B%20BASH-FF00E6?style=for-the-badge&labelColor=05020A" alt="learning" />
-<img src="https://img.shields.io/badge/BASED%20IN-SWEDEN-8B2FFF?style=for-the-badge&labelColor=05020A" alt="location" />
-<img src="https://komarev.com/ghpvc/?username=Icoolhed&style=for-the-badge&color=8B2FFF&labelColor=05020A&label=PROFILE+VIEWS" alt="profile views" />
+<img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/terminal.svg" width="100%" alt="Animated terminal on a rack monitor: whoami (isak, devops student, sweden), a kubectl listing of my projects with their status and age, and cat ~/now.txt with what I'm building and learning." />
 
-</div>
+<h3 align="center">WHAT I'M BUILDING</h3>
 
----
+<p align="center">
+<img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/module-loopline.svg" width="49%" alt="Loopline, a self-hosted file server built around a producer's workflow: tagged folders, BPM and key detection from filenames, in-browser waveform previews, a real playback queue and password-protected share links. FastAPI, Python, Docker, SQLite." />
+<img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/module-artspecifikationer.svg" width="49%" alt="Artspecifikationer, a field guide in Swedish where every animal gets a technical data sheet instead of an encyclopedia entry. React, Vite, React Router." />
+</p>
 
-```console
-isak@coolhed:~$ kubectl get deployments -n icoolhed --watch
+<p align="center">
+<img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/module-isak-sandbox.svg" width="49%" alt="isak-sandbox, a single-node K3s box for breaking things safely. Ansible-provisioned and ArgoCD-managed; home-lab ideas get tried here first. K3s, Ansible, ArgoCD." />
+<a href="https://github.com/icoolhed-hq/formcraft"><img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/module-formcraft.svg" width="49%" alt="Formcraft, a low-code visual form builder in one React file that exports schema JSON or a React and Tailwind component. Public repo. React, Tailwind, Vite, Lucide." /></a>
+</p>
 
-NAME                 READY   STATUS    AGE
-loopline             1/1     Running   new
-artspecifikationer   1/1     Running   new
-isak-sandbox         1/1     Running   new
-formcraft            1/1     Running   public
-neonwave             1/1     Running   stable
-dopamine-scroll      1/1     Running   stable
-readme-bot           N/N     Running   automated
-```
+<h3 align="center">SIGNAL</h3>
 
----
+<img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/spectrum.svg" width="100%" alt="My GitHub contributions over the last 12 months, drawn as a spectrum analyzer with one bar per week, plus total, current streak, longest streak and best day." />
 
-<h3 align="center">⚡ &nbsp;WHAT I'M BUILDING&nbsp; ⚡</h3>
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### 🎚️ &nbsp;Loopline
-A self-hosted file server built around a **producer's workflow**, not generic
-cloud storage: tagged folders, BPM/key detection from filenames, in-browser
-waveform previews, a real playback queue, and password-protected share links.
-
-`fastapi` `python` `docker` `sqlite`
-
-</td>
-<td width="50%" valign="top">
-
-### 🦉 &nbsp;Artspecifikationer
-A field guide to animals laid out like technical data sheets instead of the
-usual encyclopedia format. Built in Swedish, one component per species card.
-
-`react` `vite` `react-router`
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### ☸️ &nbsp;isak-sandbox
-A single-node K3s box for breaking things safely — Ansible-provisioned,
-ArgoCD-managed, the place new home-lab ideas get tried before they touch
-the real cluster.
-
-`k3s` `ansible` `argocd`
-
-</td>
-<td width="50%" valign="top">
-
-### 🧩 &nbsp;[Formcraft](https://github.com/icoolhed-hq/formcraft)
-A low-code visual form builder living in **one React file**. Drag elements
-onto a canvas, shape them in the inspector, then export schema JSON or a
-production-ready React + Tailwind component.
-
-`react` `tailwind` `vite` `lucide`
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### 🌊 &nbsp;NEONWAVE
-A 3D audio synth in the browser — Web Audio driving reactive Three.js
-geometry, wrapped in a glass-and-neon HUD. Loud, purple, unnecessary.
-
-`three.js` `web-audio` `canvas`
-
-</td>
-<td width="50%" valign="top">
-
-### 📜 &nbsp;dopamine-scroll
-A scroll-driven landing page that doesn't hold back — heavy animation and a
-reflex minigame hidden in the scroll, built to see how far vanilla JS goes.
-
-`javascript` `css-animation` `scroll-driven`
-
-</td>
-</tr>
-</table>
-
----
-
-<h3 align="center">📊 &nbsp;BY THE NUMBERS&nbsp; 📊</h3>
+<h3 align="center">TOOLBOX</h3>
 
 <div align="center">
 
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=Icoolhed&hide_border=true&background=05020A&stroke=8B2FFF&ring=00F6FF&fire=FF00E6&currStreakLabel=00F6FF&sideLabels=CFE9FF&currStreakNum=CFE9FF&sideNums=CFE9FF&dates=8b2fffb0" alt="GitHub streak" />
-
-</div>
-
----
-
-<h3 align="center">🛠️ &nbsp;THE TOOLBOX&nbsp; 🛠️</h3>
-
-<div align="center">
-
-<img src="https://skillicons.dev/icons?i=cs,unity,js,react,vite,tailwind,threejs,python,fastapi&theme=dark" alt="languages and frameworks" />
+<img src="https://skillicons.dev/icons?i=cs,unity,js,react,vite,tailwind,threejs,python,fastapi&theme=dark" alt="C#, Unity, JavaScript, React, Vite, Tailwind, Three.js, Python, FastAPI" />
 <br />
-<img src="https://skillicons.dev/icons?i=kubernetes,docker,ansible,nginx,githubactions,git,bash,linux,vscode,raspberrypi&theme=dark" alt="infrastructure and tooling" />
+<img src="https://skillicons.dev/icons?i=kubernetes,docker,ansible,nginx,githubactions,git,bash,linux,vscode,raspberrypi&theme=dark" alt="Kubernetes, Docker, Ansible, Nginx, GitHub Actions, Git, Bash, Linux, VS Code, Raspberry Pi" />
 
 </div>
 
----
-
-<div align="center">
-
-<h3>🐍 &nbsp;WATCH IT EAT MY COMMITS&nbsp; 🐍</h3>
+<br />
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/snake.svg" />
-  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/snake.svg" alt="contribution snake" width="100%" />
+  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/snake.svg" width="100%" alt="A snake eating my contribution graph" />
 </picture>
 
-<br /><br />
+<img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/footer.svg" width="100%" alt="" />
 
-<img src="https://capsule-render.vercel.app/api?type=waving&section=footer&height=120&color=0:00F6FF,55:8B2FFF,100:05020A" width="100%" alt="" />
-
-<sub><b>hit me up</b> · <a href="https://github.com/Icoolhed">github.com/Icoolhed</a></sub>
-
-</div>
+<div align="center"><sub><b>hit me up</b> · <a href="https://github.com/Icoolhed">github.com/Icoolhed</a></sub></div>
