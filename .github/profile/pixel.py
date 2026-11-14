@@ -201,11 +201,13 @@ def _changed(a: Canvas, b: Canvas) -> tuple[int, int, int, int]:
     return min(xs), ys[0], max(xs) + 1, ys[-1] + 1
 
 
-def apng(frames: list[Canvas], delay_ms: int = 200, scale: int = SCALE, plays: int = 0) -> bytes:
+def apng(frames: list[Canvas], delay_ms: int | list[int] = 200, scale: int = SCALE,
+         plays: int = 0) -> bytes:
     """Indexed-colour animated PNG. Frames after the first store only the rectangle that changed.
 
     Viewers without APNG support show the first frame, so it has to stand on
-    its own. `plays` = 0 loops forever.
+    its own. `delay_ms` is one delay for every frame or a list with one per
+    frame. `plays` = 0 loops forever; otherwise the animation stops on its last frame.
     """
     first = frames[0]
     out = [b"\x89PNG\r\n\x1a\n",
@@ -221,7 +223,7 @@ def apng(frames: list[Canvas], delay_ms: int = 200, scale: int = SCALE, plays: i
         if len(frames) > 1:
             out.append(_chunk(b"fcTL", struct.pack(
                 ">IIIIIHHBB", seq, (x1 - x0) * scale, (y1 - y0) * scale, x0 * scale, y0 * scale,
-                delay_ms, 1000, 0, 0)))  # dispose: none, blend: source
+                delay_ms if isinstance(delay_ms, int) else delay_ms[i], 1000, 0, 0)))  # dispose: none, blend: source
             seq += 1
         if i == 0:
             out.append(_chunk(b"IDAT", data))

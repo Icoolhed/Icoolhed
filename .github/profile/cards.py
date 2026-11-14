@@ -11,7 +11,10 @@ import math
 from pixel import BLUE, BONE, EMBER, INK, NAVY, NIGHT, SAND, Canvas, apng, fbm, hash01, ramp, text_width
 
 W, H = 224, 112
-FRAMES, FRAME_MS = 24, 200  # a 4.8 s loop
+FRAMES, FRAME_MS = 72, 110  # a 7.9 s loop: many short frames, so the motion is slow and even
+STEPS = 24                  # the stepped motifs (typing, blinking) count in 24 beats per loop
+STEP_MS = FRAMES * FRAME_MS // STEPS
+RUN_STEPS = 271             # how long Rackcode keeps running after "> run": about 90 s
 MID_X, MID_Y = W // 2, 38   # centre of the motif area
 
 
@@ -72,6 +75,7 @@ def orb(c: Canvas, f: int) -> None:
 
 def racks(c: Canvas, f: int) -> None:
     """isak-sandbox: three rack units; the middle one is being broken and restarted."""
+    f = f * STEPS // FRAMES
     for unit in range(3):
         x0, y0 = MID_X - 56, 9 + unit * 21
         _rect(c, x0, y0, 112, 17, BLUE, NIGHT)
@@ -83,8 +87,8 @@ def racks(c: Canvas, f: int) -> None:
             if unit == 1:
                 on = (f // 3) % 2 == 0
                 colour = EMBER if on else NIGHT
-                if f >= FRAMES - 6:  # it comes back at the end of the loop
-                    colour = SAND if led <= (f - (FRAMES - 6)) else NIGHT
+                if f >= STEPS - 6:  # it comes back at the end of the loop
+                    colour = SAND if led <= (f - (STEPS - 6)) else NIGHT
             else:
                 colour = SAND if hash01(f // 2, unit, led) > 0.35 else NAVY
             _rect(c, lx, ly, 3, 3, colour, colour)
@@ -92,6 +96,7 @@ def racks(c: Canvas, f: int) -> None:
 
 def form(c: Canvas, f: int) -> None:
     """Formcraft: a form filling itself in, field by field, then the button lights up."""
+    f = f * STEPS // FRAMES
     x0 = MID_X - 62
     for row in range(3):
         y0 = 7 + row * 17
@@ -111,8 +116,9 @@ def form(c: Canvas, f: int) -> None:
             c.set(x0 + 56 + dx, 61 + dy, SAND)
 
 
-def code(c: Canvas, f: int) -> None:
+def code(c: Canvas, f: int, step: int | None = None) -> None:
     """Rackcode: commands typed into a terminal while the racks beside it wake up."""
+    f = f * STEPS // FRAMES if step is None else step
     lines = ["> buy rack", "> wire 4", "> run"]
     budget = f + 1
     for i, line in enumerate(lines):
@@ -174,5 +180,15 @@ def render(ctx: dict) -> dict:
             c = base.copy()
             draw(c, f)
             frames.append(c)
-        out[f"card-{project['slug']}.png"] = apng(frames, FRAME_MS)
+        delays, plays = FRAME_MS, 0
+        if draw is code:
+            # Typed once, not looped: after "> run" the racks keep blinking for a while,
+            # one frame per beat, and then the card rests on its last frame.
+            delays = [FRAME_MS] * FRAMES + [STEP_MS] * RUN_STEPS
+            for step in range(STEPS, STEPS + RUN_STEPS):
+                c = base.copy()
+                code(c, 0, step=step)
+                frames.append(c)
+            plays = 1
+        out[f"card-{project['slug']}.png"] = apng(frames, delays, plays=plays)
     return out
