@@ -10,6 +10,10 @@ The scene is generated, not a photo, but most of what happens in it is live:
   cabin     the window is lit, and the chimney smokes, if there were
             contributions today or yesterday
   meteors   one shooting star per contribution today, at most six per loop
+  stars     one star per contribution in the last 12 months, at most 400
+  wind      rain, snow and the chimney smoke lean with the real wind
+  birds     three of them circle while the sun is up and it is dry
+  december  lights on the cabin from 1 December to 6 January, fireworks at New Year
 
 The image is a 9.6 s looping animation. The ridges and the text stay still.
 """
@@ -129,8 +133,8 @@ def _aurora(c: Canvas, strength: float, cos: float, sin: float) -> None:
                     c.px[y][x] = GREEN
 
 
-def _stars(c: Canvas, light: Light, f: int) -> None:
-    for i in range(140):
+def _stars(c: Canvas, light: Light, count: int, f: int) -> None:
+    for i in range(count):
         if hash01(i, 7) >= light.stars:  # the stars come out one by one as it gets darker
             continue
         x, y = int(hash01(i, 1) * W), int(hash01(i, 2) ** 1.6 * HORIZON * 0.62)
@@ -248,7 +252,7 @@ def _cabin(c: Canvas, snow: float) -> None:
         c.set(CABIN_X + CHIMNEY[0], top + CHIMNEY[1] + dy, NIGHT)
 
 
-def _cabin_life(c: Canvas, light: Light, home: bool, f: int) -> None:
+def _cabin_life(c: Canvas, light: Light, home: bool, lean: float, festive: bool, f: int) -> None:
     """The window and, when someone is home, a flickering lamp and chimney smoke."""
     top = _cabin_ground() - len(CABIN) + 1
     lamp = NIGHT
@@ -258,6 +262,10 @@ def _cabin_life(c: Canvas, light: Light, home: bool, f: int) -> None:
         for col, ch in enumerate(line):
             if ch == "o":
                 c.set(CABIN_X + col, top + r, lamp)
+    if festive:  # a string of lights along the eaves
+        for col in range(1, 14, 2):
+            on = (col // 2 + f // 4) % 3
+            c.set(CABIN_X + col, top + 4, (EMBER, SAND, BONE)[on])
     if not home:
         return
     sx, sy = CABIN_X + CHIMNEY[0], top + CHIMNEY[1] - 1
@@ -265,24 +273,51 @@ def _cabin_life(c: Canvas, light: Light, home: bool, f: int) -> None:
         age = (f + puff * FRAMES // 4) % FRAMES
         if age >= 26 or (age > 16 and (age + puff) % 2):
             continue
-        x = sx + age // 5 + round(math.sin(age / 4.0 + puff))
+        x = sx - round(lean * age / 2.5) + round(math.sin(age / 4.0 + puff))
         c.set(x, sy - age // 3, BLUE if light.dark else BONE)
 
 
-def _precipitation(c: Canvas, rain: float, snow: float, f: int) -> None:
+def _birds(c: Canvas, f: int) -> None:
+    """Three birds circling; wings up on one beat, flat on the next."""
+    for b in range(3):
+        turn = 2 * math.pi * (f / FRAMES + b * 0.31)
+        x = int(196 + (46 + 12 * b) * math.cos(turn))
+        y = int(30 + (9 + 3 * b) * math.sin(turn))
+        up = (f + b) % 4 < 2
+        for dx in (-2, -1, 1, 2):
+            c.set(x + dx, y - (abs(dx) - 1 if up else 0), INK)
+        c.set(x, y, INK)
+
+
+def _fireworks(c: Canvas, f: int) -> None:
+    """Three bursts per loop: a ring of sparks that spreads, sags and fades."""
+    for b, (cx, cy) in enumerate(((228, 30), (150, 22), (318, 40))):
+        age = (f - b * FRAMES // 3) % FRAMES
+        if age > 13:
+            continue
+        for s in range(22):
+            a = 2 * math.pi * s / 22
+            r = 3 + age * 1.8
+            x, y = int(cx + r * math.cos(a)), int(cy + r * math.sin(a) * 0.8 + age * age * 0.06)
+            if 0 <= y < SKY_ROWS and (age < 9 or (s + age) % 2):
+                c.set(x, y, (BONE, SAND, EMBER)[(b + (age > 6)) % 3])
+
+
+def _precipitation(c: Canvas, rain: float, snow: float, lean: float, f: int) -> None:
     if snow > 0:
         for i in range(min(160, int(70 + snow * 400))):
-            x = int(hash01(i, 51) * W) + round(2 * math.sin(2 * math.pi * (2 * f / FRAMES + hash01(i, 52))))
             y = (int(hash01(i, 53) * FALL) + 3 * f) % FALL
+            x = (int(hash01(i, 51) * (W + 120)) - 60 - round(lean * y * 0.8)
+                 + round(2 * math.sin(2 * math.pi * (2 * f / FRAMES + hash01(i, 52)))))
             c.set(x, y, BONE)
             if hash01(i, 54) > 0.7:
                 c.set(x + 1, y, BONE)
     elif rain > 0:
         for i in range(min(150, int(35 + rain * 250))):
             y = (int(hash01(i, 61) * FALL) + 9 * f) % FALL
-            x = int(hash01(i, 62) * (W + 40)) - y // 4
+            x = int(hash01(i, 62) * (W + 120)) - 60 - round(lean * y * 0.5)
             for k in range(4):
-                c.set(x - k // 2, y + k, BLUE)
+                c.set(x - round(lean * k * 0.5), y + k, BLUE)
 
 
 def _overlay(c: Canvas, layer: Canvas) -> None:
@@ -301,6 +336,12 @@ def render(ctx: dict) -> dict:
     today = recent[-1] if recent else 0
     home = any(recent)
     season = snow_amount(ctx["when"], content["place"]["lat"])
+    stars = min(400, sum(d["count"] for d in data["calendar"][-365:])) if data else 140
+    # The picture looks south, so east is on the left: a west wind blows things to the left.
+    lean = -math.sin(math.radians(cond.get("wdir") or 0.0)) * min(1.0, (cond.get("wind") or 0.0) / 10)
+    when = ctx["when"]
+    festive = (when.month == 12) or (when.month == 1 and when.day <= 6)
+    new_year = (when.month, when.day) in ((12, 31), (1, 1))
     night = light.stars > 0.6
     aurora = _clamp((kp - AURORA_KP + 1.5) / 3) if kp >= AURORA_KP and night else 0.0
     meteors = min(MAX_METEORS, today) if light.elev < -10 else 0
@@ -328,17 +369,21 @@ def render(ctx: dict) -> dict:
         _sky(c, light, tone, wisps, cos, sin)
         if aurora:
             _aurora(c, aurora, cos, sin)
-        _stars(c, light, f)
+        _stars(c, light, stars, f)
         _meteors(c, meteors, f)
         for x, y, colour in moon:
             c.px[y][x] = colour
         if light.elev > -3:
             _sun(c, light)
+        if new_year and night:
+            _fireworks(c, f)
         if clouds:
             _clouds(c, light, level, clouds, cos, sin)
+        if light.elev > 2 and not rain and not snowfall:
+            _birds(c, f)
         _overlay(c, land)
-        _cabin_life(c, light, home, f)
-        _precipitation(c, rain, snowfall, f)
+        _cabin_life(c, light, home, lean, festive, f)
+        _precipitation(c, rain, snowfall, lean, f)
         _overlay(c, words)
         frames.append(c)
     return {"hero.png": apng(frames, FRAME_MS)}

@@ -18,7 +18,7 @@ from pathlib import Path
 
 TIMEOUT = 15
 WEATHER = ("https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
-           "&current=cloud_cover,rain,showers,snowfall")
+           "&current=cloud_cover,rain,showers,snowfall,wind_speed_10m,wind_direction_10m&wind_speed_unit=ms")
 KP = "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json"
 
 
@@ -33,13 +33,16 @@ def _warn(msg: str) -> None:
 
 
 def fetch(place: dict) -> dict:
-    """{cloud: 0..1, rain: mm per 15 min, snow: cm per 15 min, kp: 0..9}, each None if unknown."""
-    out = {"cloud": None, "rain": None, "snow": None, "kp": None}
+    """{cloud: 0..1, rain: mm per 15 min, snow: cm per 15 min, wind: m/s, wdir: degrees the
+    wind comes from, kp: 0..9}, each None if unknown."""
+    out = {"cloud": None, "rain": None, "snow": None, "wind": None, "wdir": None, "kp": None}
     try:
         now = _get(WEATHER.format(lat=place["lat"], lon=place["lon"]))["current"]
         out["cloud"] = float(now["cloud_cover"]) / 100.0
         out["rain"] = float(now["rain"]) + float(now["showers"])
         out["snow"] = float(now["snowfall"])
+        out["wind"] = float(now["wind_speed_10m"])
+        out["wdir"] = float(now["wind_direction_10m"])
     except Exception as e:  # noqa: BLE001 - the renderer must never crash on data
         _warn(f"weather: {type(e).__name__}: {e}")
     try:

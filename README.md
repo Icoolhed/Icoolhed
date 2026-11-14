@@ -1,5 +1,5 @@
 <!--
-  The two images are drawn by .github/profile/render.py and published to the
+  The images are drawn by .github/profile/render.py and published to the
   `output` branch by .github/workflows/profile.yml, hourly and on every change.
 -->
 
@@ -19,24 +19,20 @@
 
 <br />
 
-<table>
-  <tr>
-    <td width="210" valign="top"><b>Loopline</b><br /><sub>file server</sub></td>
-    <td valign="top">Self-hosted file server built around a producer's workflow: tagged folders, BPM and key read from filenames, waveform previews, a playback queue and password-protected share links.<br /><sub><code>FastAPI</code> <code>Docker</code> <code>SQLite</code></sub></td>
-  </tr>
-  <tr>
-    <td valign="top"><b>Artspecifikationer</b><br /><sub>field guide</sub></td>
-    <td valign="top">A field guide in Swedish where every animal gets a technical data sheet instead of an encyclopedia entry.<br /><sub><code>React</code> <code>Vite</code></sub></td>
-  </tr>
-  <tr>
-    <td valign="top"><b>isak-sandbox</b><br /><sub>K3s lab</sub></td>
-    <td valign="top">A single-node K3s box where home-lab ideas get tried first.<br /><sub><code>K3s</code> <code>Ansible</code> <code>ArgoCD</code></sub></td>
-  </tr>
-  <tr>
-    <td valign="top"><b><a href="https://github.com/icoolhed-hq/formcraft">Formcraft</a></b><br /><sub>form builder</sub></td>
-    <td valign="top">A visual form builder in one React file that exports schema JSON or a React and Tailwind component.<br /><sub><code>React</code> <code>Tailwind</code> <code>Vite</code></sub></td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-loopline.png" width="49%" alt="Loopline: a self-hosted file server built around a music producer's workflow." />
+  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-jarvis.png" width="49%" alt="Jarvis: a personal assistant built on my own notes." />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-isak-sandbox.png" width="49%" alt="isak-sandbox: a single-node K3s lab for breaking things safely." />
+  <a href="https://github.com/icoolhed-hq/formcraft"><img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-formcraft.png" width="49%" alt="Formcraft: a visual form builder in one React file. Public repo." /></a>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-rackcode.png" width="49%" alt="Rackcode: a Roblox server room tycoon with its own in-game programming language." />
+  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-artspecifikationer.png" width="49%" alt="Artspecifikationer: a field guide in Swedish where every animal gets a spec sheet." />
+</p>
 
 <br />
 
@@ -45,5 +41,5 @@
 <details>
 <summary><sub>How this page is drawn</sub></summary>
 <br />
-<sub>Both images come from <a href="https://github.com/Icoolhed/Icoolhed/tree/main/.github/profile">a small Python script</a> in this repo: ordered dithering in eight colours, no dependencies, redrawn every hour. The sky follows Stockholm: the sun's height, the moon's phase, cloud, rain and snow, and northern lights on the rare nights the Kp index reaches 5. The cabin window is lit if I pushed something today or yesterday, and each contribution today is a shooting star tonight.</sub>
+<sub>Every image comes from <a href="https://github.com/Icoolhed/Icoolhed/tree/main/.github/profile">a small Python script</a> in this repo: ordered dithering in eight colours, no dependencies, redrawn every hour. The sky follows Stockholm: the sun's height, the moon's phase, cloud, rain and snow, and northern lights on the rare nights the Kp index reaches 5. Rain, snow and the chimney smoke lean with the wind. The cabin window is lit if I pushed something today or yesterday, every star is a contribution from the last 12 months, and each contribution today is a shooting star tonight.</sub>
 </details>

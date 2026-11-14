@@ -4,7 +4,7 @@
     python .github/profile/render.py --out dist              # CI: live data via GITHUB_TOKEN
     python .github/profile/render.py --out dist --data d.json  # local: cached data
     python .github/profile/render.py --out dist --only hero --at 2026-06-21T12:00
-    python .github/profile/render.py --out dist --cond '{"cloud": 0.4, "snow": 0.2, "kp": 6}'
+    python .github/profile/render.py --out dist --cond '{"cloud": 0.4, "snow": 0.2, "wind": 6, "kp": 6}'
 
 The handle, tagline and place live in profile.json at the repo root. The sky
 follows the sun at that place for the moment of rendering (--at, in UTC,
@@ -31,6 +31,7 @@ sys.path.insert(0, str(HERE))
 PANELS = {
     "hero": "hero",        # hero.png
     "terrain": "terrain",  # contributions.png (needs data)
+    "cards": "cards",      # card-<slug>.png per project
 }
 
 
@@ -41,7 +42,7 @@ def main() -> int:
     ap.add_argument("--data", help="read GitHub data from this JSON file instead of the API")
     ap.add_argument("--only", help="comma-separated panel names: " + ",".join(PANELS))
     ap.add_argument("--at", help="render for this UTC time (ISO 8601) instead of now")
-    ap.add_argument("--cond", help="JSON with cloud (0..1), rain, snow and kp, instead of fetching them")
+    ap.add_argument("--cond", help="JSON with cloud (0..1), rain, snow, wind, wdir and kp, instead of fetching them")
     ap.add_argument("--require-data", action="store_true",
                     help="exit non-zero if GitHub data can't be fetched (CI: keep the last good render)")
     args = ap.parse_args()
