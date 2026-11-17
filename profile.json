@@ -32,18 +32,6 @@
       "line": "visual form builder",
       "motif": "form",
       "url": "https://github.com/icoolhed-hq/formcraft"
-    },
-    {
-      "slug": "rackcode",
-      "name": "Rackcode",
-      "line": "roblox server room tycoon",
-      "motif": "code"
-    },
-    {
-      "slug": "artspecifikationer",
-      "name": "Artspecifikationer",
-      "line": "animals as spec sheets",
-      "motif": "moth"
     }
   ]
 }

@@ -29,11 +29,6 @@
   <a href="https://github.com/icoolhed-hq/formcraft"><img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-formcraft.png" width="49%" alt="Formcraft: a visual form builder in one React file. Public repo." /></a>
 </p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-rackcode.png" width="49%" alt="Rackcode: a Roblox server room tycoon with its own in-game programming language." />
-  <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/card-artspecifikationer.png" width="49%" alt="Artspecifikationer: a field guide in Swedish where every animal gets a spec sheet." />
-</p>
-
 <br />
 
 <img src="https://raw.githubusercontent.com/Icoolhed/Icoolhed/output/contributions.png" width="100%" alt="My GitHub contributions over the last 12 months drawn as a dithered ridgeline, one point per week, with the total, best day and longest streak." />
